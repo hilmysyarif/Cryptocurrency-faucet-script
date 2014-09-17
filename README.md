@@ -20,7 +20,7 @@ Faucet features:
 Installation:
 
 1. Download or clone this repository
-2. Upload the files t your ftp folder
+2. Upload the files to your ftp folder
 3. Create a Database and import faucet.sql
 4. Open the config.php and edit all settings to suit your needs
 5. Create a .htaccess and .htpasswd for the cronjob folders /cron/ and /lib/proxy_filter/cron/, so just you can fire them!
@@ -39,6 +39,7 @@ Add a new line and set your code,minimum_payout,maximum_payout and uses.
 - uses = -0 // Promo code disabled
 - uses = -1 // No limit on using this code
 - uses = 50 // The code counts down until 0 and works e.g. 50 times
+
 
 
 Feel free to donate :)
