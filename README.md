@@ -30,7 +30,7 @@ If you set "stage_payments" => true and "staged_payment_cron_only" => true you h
 
 If you set "stage_payments" => true and "staged_payment_cron_only" => false you just have to create a cronjob for /lib/proxy_filter/cron/tor.php
 
-// IMPORTANT: The tor proxy list gets downloaded from https://www.dan.me.uk/torlist/ - He just allow to download it only once th hour! Otherwise you will be banned from the service! //
+// IMPORTANT: The tor proxy list gets downloaded from https://www.dan.me.uk/torlist/ - He just allow to download it only once the hour! Otherwise you will be banned from the service! //
 
 
 How to add promo codes:
