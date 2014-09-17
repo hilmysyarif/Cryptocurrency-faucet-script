@@ -21,7 +21,7 @@ Installation:
 
 1. Download or clone this repository
 2. Upload the files to your ftp folder
-3. Create a Database and import faucet.sql
+3. Create a database and import faucet.sql
 4. Open the config.php and edit all settings to suit your needs
 5. Create a .htaccess and .htpasswd for the cronjob folders /cron/ and /lib/proxy_filter/cron/, so just you can fire them!
 6. Create cronjob(s):
@@ -34,7 +34,7 @@ If you set "stage_payments" => true and "staged_payment_cron_only" => false you 
 How to add promo codes:
 
 Go to your database and find the sf_promo_codes table.
-Add a new line and set your code,minimum_payout,maximum_payout and uses.
+Add a new line and set your code, minimum_payout, maximum_payout and uses.
 
 - uses = -0 // Promo code disabled
 - uses = -1 // No limit on using this code
