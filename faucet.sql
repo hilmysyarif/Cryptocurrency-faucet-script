@@ -16,7 +16,7 @@ CREATE TABLE `sf_payouts` (
   `promo_code` varchar(80) NOT NULL DEFAULT '',
   `promo_payout_amount` double NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=296116 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=0 ;
 
 CREATE TABLE `sf_promo_codes` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
@@ -25,7 +25,7 @@ CREATE TABLE `sf_promo_codes` (
   `maximum_payout` double NOT NULL,
   `uses` int(11) NOT NULL DEFAULT '-1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=0 ;
 
 INSERT INTO `sf_promo_codes` (`id`, `code`, `minimum_payout`, `maximum_payout`, `uses`) VALUES
 (11, 'double', 1, 1, -1);
@@ -35,4 +35,4 @@ CREATE TABLE `sf_staged_payments` (
   `payout_address` varchar(34) NOT NULL DEFAULT '',
   `payout_amount` float NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=196962 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=0 ;
