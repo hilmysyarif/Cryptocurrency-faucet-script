@@ -47,7 +47,7 @@
     <div class="panel-body">
         <span>Balance:</span> 
         <span class="highlight">{{BALANCE}}</span> {{COINNAME}}<br/>
-        Already paid:<span class="highlight" >{{TOTAL_PAYOUT}}</span> with <span class="highlight" >{{NUMBER_OF_PAYOUTS}}</span> payouts<br/><br/>
+        Already paid: <span class="highlight" >{{TOTAL_PAYOUT}}</span> with <span class="highlight" >{{NUMBER_OF_PAYOUTS}}</span> payouts<br/><br/>
       
         How many payments are currently staged: <span class="highlight" >{{STAGED_PAYMENT_COUNT}}</span> payments.<br/>
       
