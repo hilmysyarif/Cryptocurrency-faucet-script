@@ -19,6 +19,8 @@
       <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
 
+    {{HEAD}}
+
 	<title>{{TITLE}}</title>
     
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -44,26 +46,14 @@
     </div>
     <div class="panel-body">
         <span>Balance:</span> 
-        <span class="highlight">{{BALANCE}}</span> {{COINNAME}}<br>
-        Already paid:<span class="highlight" >
-        <?php
-            mysql_connect($this->config['mysql_host'],$this->config['mysql_user'],$this->config['mysql_password']);
-            mysql_select_db($this->config['mysql_database']);
-            $erg = mysql_query ("SELECT SUM(payout_amount + promo_payout_amount) as anzahl FROM sf_payouts");
-            $result = mysql_fetch_array($erg);
-            $result = $result["anzahl"];
-            $result = round($result,8);
-            echo $result;
-        ?>
-        
-        
-        </span> with <span class="highlight" >{{NUMBER_OF_PAYOUTS}}</span> payouts<br><br>
+        <span class="highlight">{{BALANCE}}</span> {{COINNAME}}<br/>
+        Already paid:<span class="highlight" >{{TOTAL_PAYOUT}}</span> with <span class="highlight" >{{NUMBER_OF_PAYOUTS}}</span> payouts<br/><br/>
       
-        How many payments are currently staged: <span class="highlight" >{{STAGED_PAYMENT_COUNT}}</span> payments.<br>
+        How many payments are currently staged: <span class="highlight" >{{STAGED_PAYMENT_COUNT}}</span> payments.<br/>
       
-        How many payments are left before they are executed: <span class="highlight" >{{STAGED_PAYMENTS_LEFT}}</span> payments.<br>
+        How many payments are left before they are executed: <span class="highlight" >{{STAGED_PAYMENTS_LEFT}}</span> payments.<br/>
       
-        Payments will be done after <span class="highlight" >{{STAGED_PAYMENT_THRESHOLD}}</span> staged payments or automated hourly.<br><br>
+        Payments will be done after <span class="highlight" >{{STAGED_PAYMENT_THRESHOLD}}</span> staged payments or automated hourly.<br/><br/>
         You can get free {{COINNAME}} every hour.
   </div>
 </div>
@@ -136,7 +126,7 @@
             <h3 class="panel-title">Status</h3>
         </div>
         <div class="panel-body">
-            Success! You have been awarded with {{PAYOUT_AMOUNT}} {{COINNAME}}!<br>
+            Success! You have been awarded with {{PAYOUT_AMOUNT}} {{COINNAME}}!<br/>
             Additionally, you received a bonus of {{PROMO_PAYOUT_AMOUNT}} {{COINNAME}}!
         </div>
     </div>

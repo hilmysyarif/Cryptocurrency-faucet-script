@@ -44,10 +44,14 @@ $config = array(
 	// "both": check both the IP and coins address in the payout history.
 	"user_check" => "both",
 
-	"captcha" => "recaptcha",
+	"use_captcha" => true, // require the user to enter a captcha
+
+	"captcha" => "recaptcha", // valid options: recaptcha, recaptcha2
+
+	"captcha_https" => false, // use https (only for recaptcha2) valid options: true, false
 
 	// enter your private and public reCAPTCHA key here:
-	    "captcha_config" => array(
+	"captcha_config" => array(
 		"private_key" => "privatekey",
 		"public_key" => "publickey"
 		),

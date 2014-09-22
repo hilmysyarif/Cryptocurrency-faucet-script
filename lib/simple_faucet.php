@@ -16,6 +16,8 @@ class simple_faucet
 
 	protected $balance = 0;
 
+	protected $header = '';
+
 
 	public function __construct($config)
 		{
@@ -66,6 +68,8 @@ class simple_faucet
 
 		if ($this->config["captcha"] == "recaptcha")
 			require_once('./lib/recaptchalib.php');
+		elseif ($this->config["captcha"] == "recaptcha2")
+			require_once('./lib/recaptchalib2.php');
 
 		if (isset($config["rpc_user"],$config["rpc_password"],$config["rpc_host"],$config["rpc_port"],$config["mysql_user"],$config["mysql_password"],$config["mysql_host"],$config["mysql_database"]))
 			{
@@ -190,6 +194,11 @@ class simple_faucet
 			$this->status = SF_STATUS_FAUCET_INCOMPLETE; // missing some settings
 		}
 
+	public function add_head($h)
+		{
+		$this->header .= $h;
+		}
+
 	public function render()
 		{
 		if (!file_exists("./templates/".$this->config["template"].".template.php"))
@@ -200,6 +209,7 @@ class simple_faucet
 		
 		$self = $this;
 		$db = $this->db;
+		$header = $this->header;
 		$status = $this->status;
 		$config = $this->config;
 		$balance = $this->balance;
@@ -207,7 +217,7 @@ class simple_faucet
 		$payout_address = $this->payout_address;
 		$promo_payout_amount = $this->promo_payout_amount;
 
-		$template = preg_replace_callback("/\{\{([a-zA-Z-0-9\ \_]+?)\}\}/",function($match) use ($self,$db,$status,$config,$balance,$payout_amount,$payout_address,$promo_payout_amount)
+		$template = preg_replace_callback("/\{\{([a-zA-Z-0-9\ \_]+?)\}\}/",function($match) use ($self,$db,$header,$status,$config,$balance,$payout_amount,$payout_address,$promo_payout_amount)
 			{
 			switch (strtolower($match[1]))
 				{
@@ -219,8 +229,10 @@ class simple_faucet
 				case "title":
 					return isset($config[strtolower($match[1])]) ? $config[strtolower($match[1])] : $match[1];
                 
+                case "head":
+                	return $header;
                                 
-                case"coinname":
+                case "coinname":
 	               return $config["coinname"];
                 
 				case "balance":
@@ -282,13 +294,12 @@ class simple_faucet
 				// CAPTCHA:
 
 				case "captcha":
-					if ($config["captcha"] == "recaptcha")
-						return recaptcha_get_html(@$config["captcha_config"]["public_key"]);
-					return isset($_SESSION['captcha']) ? '<img src="'.$_SESSION['captcha']["image_src"].'" alt="[captcha]"/>' : '';
-					//return isset($_SESSION['captcha']) ? '<img src="'.htmlentities($_SESSION['captcha']["image_src"]).'" alt="[captcha]"/>' : '';
-
-				case "captcha_url":
-					return isset($_SESSION['captcha']) ? $_SESSION['captcha']["image_src"] : '';
+					if ($config["use_captcha"])
+						{
+						if ($config["captcha"] == "recaptcha" || $config["captcha"] == "recaptcha2")
+							return recaptcha_get_html(@$config["captcha_config"]["public_key"]);
+						}
+					return '';
 
 				default:
 					return $match[1];
@@ -331,12 +342,16 @@ class simple_faucet
 
 	protected function valid_captcha()
 		{
+		if (!$this->config["use_captcha"])
+			return true;
 		if ($this->config["captcha"] == "recaptcha")
 			{
 			$resp = @recaptcha_check_answer($this->config["captcha_config"]["private_key"],$_SERVER["REMOTE_ADDR"],@$_POST["recaptcha_challenge_field"],@$_POST["recaptcha_response_field"]);
 			return $resp->is_valid; // $resp->error;
 			}
-		return @$_POST["captcha_code"] == @$_SESSION['captcha']['code'];		
+		else
+			return recaptcha_check_answer($this->config["captcha_config"]["private_key"],@$_POST["g-recaptcha-response"],$this->config["captcha_https"]);
+		return false;		
 		}
 
 	protected function stage_payment($address,$amount)
