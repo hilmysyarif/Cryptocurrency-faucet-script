@@ -1,8 +1,4 @@
 <?php
-/*
-* Cryptocurrency faucet script
-* You are completely free to use/modify this script in any way. Credit is not required.
-*/
 
 // this is a re-implementation of recaptchalib.php so it can easily be swapped out.
 
