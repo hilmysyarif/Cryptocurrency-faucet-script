@@ -1,6 +1,5 @@
 Cryptocurrency-faucet-script
 ============================
-* You are completely free to use/modify this script in any way. Credit is not required.
 * A big THANK YOU goes to a friend who provided the script and requested to not be named.
 
 DEMO: http://wow.bitcoinproject.net/
